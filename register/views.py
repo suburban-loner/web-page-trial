@@ -4,6 +4,16 @@ from .forms import RegisterForm, LoginForm
 
 # Create your views here.
 def register(response):
+    """View function that handles registration form submissions.
+    Parameters:
+    ----------
+    response : HttpResponse object
+        The HTTP response object containing the registration form.
+    Returns:
+    -------
+    HttpResponse object
+        A redirect to the login page if the registration form is submitted and valid,
+        or a rendered registration form if the form is not submitted or invalid.    """
     if response.method == "POST":
         form = RegisterForm(response.POST)
         if form.is_valid():
@@ -17,6 +27,17 @@ def register(response):
 
 
 def login_request(request):
+    """A view function that handles the login request.
+    Parameters:
+    ----------
+    request : HttpRequest object
+    The HTTP request object containing the form data.
+
+    Returns:
+    -------
+    HttpResponse object
+    A redirect to the IndexView if the login is successful, 
+    or a rendered login template with the login form if the form is invalid or not submitted."""
     if request.method == "POST":
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
